@@ -1,9 +1,19 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-app.use (express.json());
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 const port = 3000;
+//---------------------------------------------------------לא לשכוח!!!!!-----------------------------------
+//לעשות פונקציית מחיקה ב USER POSTS כי זה מפתח זר
+//USER: לבדוק מה לעשות עם JOIN וזה משנה את כל הפונקציות כי הכנסנו ADDRESSID
+//להחזיר סטטוסים עם שגיאות והצלחות
+
+
+
+
+
+
 
 
 // const users = [
@@ -46,17 +56,17 @@ const port = 3000;
 //   res.send(user);
 // });
 
-const postsRouter=require("./routes/postsRoutes")
-app.use("/posts",postsRouter);
+const postsRouter = require("./routes/postsRoutes")
+app.use("/posts", postsRouter);
 console.log(typeof postsRouter);
 
-const todosRouter=require("./routes/todosRoutes")
-app.use("/todos",todosRouter);
+const todosRouter = require("./routes/todosRoutes")
+app.use("/todos", todosRouter);
 
-// const usersRouter=require("./routes/usersRoutes")
-// app.use("/users",usersRouter);
-// const commentsRouter=require("./routes/commentsRoutes")
-// app.use("/comments",commentsRouter);
+const usersRouter = require("./routes/usersRoutes")
+app.use("/users", usersRouter);
+const commentsRouter = require("./routes/commentsRoutes")
+app.use("/comments", commentsRouter);
 
 // app.get('/', (req,res) => { res.send("goodluck!!! omeyn!!"); })
 app.listen(port, () => {

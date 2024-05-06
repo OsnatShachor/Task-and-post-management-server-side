@@ -24,20 +24,17 @@ async function getUser(userName) {
   }
 }
 
-async function createUser( userName,name,email, phone, addressID, company) {
+async function createUser(userName,  name, email, phone, addressID, company) {
   try {
     const sql = `INSERT INTO users (userName,name,email, phone, addressID, company) VALUES (?, ?, ?, ? ,? ,? )`;
-    const result = await pool.query(sql, [userName,name,email, phone, addressID, company]);
+    const result = await pool.query(sql, [userName, name, email, phone, addressID, company]);
     console.log("result", result);
     // return result[0][0];
     return true;
-
   } catch (err) {
     throw err;
   }
 }
-
-
 
 async function deleteUser(userName) {
   //   try {
@@ -51,14 +48,17 @@ async function deleteUser(userName) {
   //     throw err;
   //   }
 }
-async function updateUser(postID, userID, title, body) {
+//מותר לי כל פעם בעדכון להביא גם את USERID???????????????????????????????????
+async function updateUser(userID,userName, name, email, phone, addressID, company) {
+  console.log("kkk");
   try {
-    const sql = `UPDATE posts SET userID = ?, title = ?, body = ? WHERE postID = ?`;
-    const result = await pool.query(sql, [userID, title, body, postID]);
+    const sql = `UPDATE users SET userID = ?,name = ?, email = ?, phone = ?, addressID = ?, company = ? WHERE userName = ?`;
+    const result = await pool.query(sql, [userID,name, email, phone, addressID, company,userName]);
+    console.log(result);
     return result[0][0];
   } catch (err) {
-    console.error('Error updating post:', err);
+    console.error('Error updating user:', err);
     throw err;
   }
 }
-module.exports = { getAllPosts, getPost, createPost, deletePost, updatePost }  
+module.exports = { getAllUsers, getUser, createUser, deleteUser, updateUser }  

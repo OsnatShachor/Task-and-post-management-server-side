@@ -1,5 +1,4 @@
 const model = require('../models/todosModel');
-//איזה בדיקות צריך לעשות????????
 async function createTodo(userID, title, completed){
     try{
         return model.createTodo(userID, title, completed);
@@ -24,12 +23,19 @@ async function getTodo(ID){
     }
 }
 async function deleteTodo(ID){
-    try{
-        return model.deleteTodo(ID)
-    }catch(err){
+    console.log("gfgg");
+    try {
+        const result = await model.deleteTodo(ID);
+        if (result === false) {
+            return false;
+        }
+        return result;
+    } catch(err) {
+        // אם הייתה שגיאה אחרת
         throw err;
     }
 }
+
 async function updateTodo(todoID,userID, title, completed){
     try{
         return model.updateTodo(todoID,userID, title, completed)

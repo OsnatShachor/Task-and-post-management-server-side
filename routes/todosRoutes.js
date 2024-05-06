@@ -60,22 +60,21 @@ router.put("/:ID", async (req, res) => {
     res.status(500).send({ error: "Failed to update todo" });
   }
 });
-//וואססס וואסס מה עושים??????????????????????????????????????????????????????????
-//צריך למחוק מכל הטבלאות POSTID מפתח זר
-// DELETE a post by ID
-// router.delete("/:ID", async (req, res) => {
-//     try {
-//       const ID = req.params.ID;
-//       const deletedPost = await controller.deletePost(ID);
-//       if (!deletedPost) {
-//         return res.status(404).send({ error: "Post not found" });
-//       }
-//       res.status(200).send({ message: "Post deleted successfully" });
-//     } catch (error) {
-//       console.error(error);
-//       res.status(500).send({ error: "Failed to delete post" });
-//     }
-//   });
+
+router.delete("/:ID", async (req, res) => {
+    try {
+      const ID = req.params.ID;
+
+      const result = await await controller.deleteTodo(ID);
+      if (result === false) {
+        return res.status(404).send({ error: "Todo not found" });
+      }
+      res.status(200).send({ message: "Todo deleted successfully" });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send({ error: "Failed to delete todo" });
+    }
+  });
   
 
 module.exports = router;

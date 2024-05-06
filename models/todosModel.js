@@ -36,17 +36,22 @@ async function createTodo(userID, title, completed) {
         throw err;
     }
 }
-   async function deleteTodo(todoID) {
-  //   try {
-  //     const sql = `DELETE FROM todos WHERE todoID = ?`;
-  //     const result = await pool.query(sql, [todoID]);
-  //      return result[0][0];
-  //   } catch (err) {
-  //     console.error('Error deleting todo:', err);
-  //     throw err;
-  //   }
+async function deleteTodo(todoID) {
+  try {
+    // בדיקה אם קיים todoID
+    const checkExistence = await pool.query('SELECT COUNT(*) AS count FROM todos WHERE todoID = ?', [todoID]);
+    if (checkExistence[0][0].count === 0) {
+      return false;
+    } else {
+      const sql = `DELETE FROM todos WHERE todoID = ?`;
+      const result = await pool.query(sql, [todoID]);
+      return result[0][0];
+    }
+  } catch (err) {
+    console.error('Error deleting todo:', err);
+    throw err;
   }
-
+}
   async function updateTodo(todoID,userID, title, completed) {
     try {
       const sql = `UPDATE todos SET userID = ?, title = ?, completed = ? WHERE todoID = ?`;
