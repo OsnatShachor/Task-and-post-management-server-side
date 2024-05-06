@@ -76,7 +76,7 @@ INSERT INTO addresses (street, city, zipcode) VALUES
 INSERT INTO users (userName, name, email, phone, addressID, company) VALUES
 ('user1', 'Georgre Doe', 'Georgre@example.com', '123-456-7890', 1, 'ABC Inc.'),
 ('user2', 'Kop Smith', 'Kop@example.com', '987-654-3210', 2, 'XYZ Corp.'),
-('user3', 'David Brown', 'david@example.com', '111-222-3333', 3, '123 Industries'),
+('user3', 'DavID Brown', 'davID@example.com', '111-222-3333', 3, '123 Industries'),
 ('user4', 'Emily Johnson', 'emily@example.com', '444-555-6666', 4, '456 Corp.'),
 ('user5', 'Michael Davis', 'michael@example.com', '777-888-9999', 5, '789 Co.'),
 ('user6', 'Sarah Wilson', 'sarah@example.com', '000-111-2222', 6, 'ABC Corp.'),
