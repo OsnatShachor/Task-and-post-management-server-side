@@ -36,7 +36,9 @@ router.post("/", async (req, res) => {
   try {
     console.log(1);
     const { userID, title, body } = req.body;
+    console.log("88");
     console.log(userID, title, body);
+    console.log("hh");
     const response = await controller.createPost(userID, title, body);
     console.log(response);
     // const newPost = await controller.getPost(response.insertID);
@@ -67,7 +69,7 @@ router.put("/:ID", async (req, res) => {
 });
 //וואססס וואסס מה עושים??????????????????????????????????????????????????????????
 //צריך למחוק מכל הטבלאות POSTID מפתח זר
-// DELETE a post by ID
+//DELETE a post by ID
 // router.delete("/:ID", async (req, res) => {
 //     try {
 //        const ID = req.params.ID;
