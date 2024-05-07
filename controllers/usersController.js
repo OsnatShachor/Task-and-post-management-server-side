@@ -10,9 +10,16 @@ async function getAllUsers(){
     }
 
 }
-async function getUser(userName){
+async function getUserByUserName(userName){
     try{
-        return model.getUser(userName)
+        return model.getUserByUserName(userName)
+    }catch(err){
+        throw err;
+    }
+}
+async function getUserByNamePassword(userName,password){
+    try{
+        return model.getUserByUserName(userName,password)
     }catch(err){
         throw err;
     }
@@ -35,4 +42,4 @@ async function updateUser(userID,userName, name, email, phone, addressID, compan
     }
 }
 
-module.exports = {createUser, getAllUsers, getUser ,updateUser}
+module.exports = {createUser, getAllUsers, getUserByUserName ,updateUser,getUserByNamePassword}

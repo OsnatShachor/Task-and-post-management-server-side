@@ -11,10 +11,20 @@ async function getAllUsers() {
   }
  
 }
-async function getUser(userName) {
+async function getUserByUserName(userName) {
   try {
     const sql = 'SELECT userID, userName, name, email, phone, company,password,street,city,zipcode FROM addresses INNER JOIN users ON addresses.addressID = users.addressID INNER JOIN passwords ON users.passwordID = passwords.passwordID WHERE users.userName = ?';
     const result = await pool.query(sql, [userName]);
+    console.log("result", result);
+    return result[0][0];
+  } catch (err) {
+    console.log(err);
+  }
+}
+async function getUserByNamePassword(userName,password) {
+  try {
+    const sql = 'SELECT userID, userName, name, email, phone, company,password,street,city,zipcode FROM addresses INNER JOIN users ON addresses.addressID = users.addressID INNER JOIN passwords ON users.passwordID = passwords.passwordID WHERE users.userName = ? AND password = ?';
+    const result = await pool.query(sql, [userName,password]);
     console.log("result", result);
     return result[0][0];
   } catch (err) {
@@ -62,5 +72,5 @@ const passwordID = passwordResult[0].passwordID;
 //   }
 // }
 
-// module.exports = { getAllUsers, getUser, createUser, updateUser }  
-module.exports = { getAllUsers, getUser, createUser }  
+// module.exports = { getAllUsers, getUserByUserName, createUser, updateUser }  
+module.exports = { getAllUsers, getUserByUserName, createUser,getUserByNamePassword }  

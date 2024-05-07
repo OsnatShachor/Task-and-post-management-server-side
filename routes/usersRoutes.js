@@ -13,12 +13,26 @@ router.get("/", async (req, res) => {
     res.status(500).send({ error: "Failed to fetch users" });
   }
 });
-
+//לשנות לPOST כדי שיהיה יותר בטיחותי?????????????????????????????????????????????????????????????????????????
 // GET a single user by ID
+// router.post("/login", async (req, res) => {
+//   try {
+//     const { userName, password } = req.body; // משיכת שם המשתמש והסיסמה מהגוף של הבקשה
+//     const user = await controller.getUserByNamePassword(userName, password); // קריאה לפונקציה שמחפשת משתמש על פי שם משתמש וסיסמה
+//     if (!user) {
+//       return res.status(404).send({ error: "User not found" }); // אם לא נמצא משתמש עם הפרטים שנשלחו, מחזירים תשובת שגיאה
+//     }
+//     res.status(200).send(user); // אחרת, מחזירים את המשתמש שנמצא
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send({ error: "Failed to fetch user" }); // אם יש שגיאה במהלך החיפוש אחר המשתמש, מחזירים תשובת שגיאה
+//   }
+// });
+
 router.get("/:userName", async (req, res) => {
   try {
     const password = req.params.userName;
-    const user = await controller.getUser(password);
+    const user = await controller.getUserByUserName(password);
     if (!user) {
       return res.status(404).send({ error: "User not found" });
     }
@@ -50,7 +64,7 @@ router.put("/:userName", async (req, res) => {
     const {  userID, name, email, phone, addressID, company} = req.body;
     console.log(userID,userName,  name, email, phone, addressID, company);
     await controller.updateUser(userID,userName, name, email, phone, addressID, company);
-    const updatedUser = await controller.getUser(userName);
+    const updatedUser = await controller.getUserByUserName(userName);
     if (!updatedUser) {
       return res.status(404).send({ error: "User not found" });
     }
