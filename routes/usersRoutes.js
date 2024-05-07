@@ -31,9 +31,9 @@ router.get("/:userName", async (req, res) => {
 
 router.post("/", async (req, res) => {
     try {
-      const { userName,  name, email, phone, addressID, company} = req.body; // Assuming you meant to include completed
-      console.log(userName,  name, email, phone, addressID, company);
-      const response = await controller.createUser(userName,  name, email, phone, addressID, company);
+      const { userName, name, email, phone, company, password, street, city, zipcode} = req.body; // Assuming you meant to include completed
+      console.log(userName, name, email, phone, company, password, street, city, zipcode);
+      const response = await controller.createUser(userName, name, email, phone, company, password, street, city, zipcode);
       console.log(response);
       res.status(201).send(response);
     } catch (error) {
@@ -60,22 +60,6 @@ router.put("/:userName", async (req, res) => {
     res.status(500).send({ error: "Failed to update user" });
   }
 });
-//וואססס וואסס מה עושים??????????????????????????????????????????????????????????
-//צריך למחוק מכל הטבלאות POSTID מפתח זר
-// DELETE a post by ID
-// router.delete("/:ID", async (req, res) => {
-//     try {
-//       const ID = req.params.ID;
-//       const deletedPost = await controller.deletePost(ID);
-//       if (!deletedPost) {
-//         return res.status(404).send({ error: "Post not found" });
-//       }
-//       res.status(200).send({ message: "Post deleted successfully" });
-//     } catch (error) {
-//       console.error(error);
-//       res.status(500).send({ error: "Failed to delete post" });
-//     }
-//   });
-  
+
 
 module.exports = router;

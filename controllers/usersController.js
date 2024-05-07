@@ -1,13 +1,6 @@
 const model = require('../models/usersModel');
 //איזה בדיקות צריך לעשות????????
-async function createUser(userName, name, email, phone, addressID, company){
-    try{
-        return model.createUser(userName, name, email, phone, addressID, company);
-    }catch(err){
-        throw err;
-    }
-    
-}
+
 async function getAllUsers(){
     try{
         return model.getAllUsers()
@@ -24,13 +17,15 @@ async function getUser(userName){
         throw err;
     }
 }
-async function deleteUser(ID){
-    // try{
-    //     return model.deleteTodo(ID)
-    // }catch(err){
-    //     throw err;
-    // }
+
+async function createUser(userName, name, email, phone, company, password, street, city, zipcode){
+    try{
+        return model.createUser(userName, name, email, phone, company, password, street, city, zipcode);
+    }catch(err){
+        throw err;
+    }  
 }
+
 async function updateUser(userID,userName, name, email, phone, addressID, company){
     console.log("77777");
     try{
@@ -40,4 +35,4 @@ async function updateUser(userID,userName, name, email, phone, addressID, compan
     }
 }
 
-module.exports = {createUser, getAllUsers, getUser ,deleteUser,updateUser}
+module.exports = {createUser, getAllUsers, getUser ,updateUser}

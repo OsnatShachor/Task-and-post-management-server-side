@@ -1,4 +1,5 @@
 
+
 /* Create the database */
 CREATE DATABASE  IF NOT EXISTS postsDB;
 
@@ -9,7 +10,7 @@ DROP TABLE IF EXISTS posts;
 DROP TABLE IF EXISTS todos;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS addresses;
-
+DROP TABLE IF EXISTS passwords;
 /* Create the tables */
 
 
@@ -21,6 +22,12 @@ CREATE TABLE addresses (
   PRIMARY KEY (addressID)
 );
 
+CREATE TABLE passwords (
+  passwordID int AUTO_INCREMENT,
+  password varchar(50) NOT NULL,
+  PRIMARY KEY (passwordID)
+);
+
 CREATE TABLE users (
   userID int(9) AUTO_INCREMENT,
   userName varchar(50) NOT NULL,
@@ -29,9 +36,13 @@ CREATE TABLE users (
   phone varchar(100) NOT NULL,
   addressID int NOT NULL,
   company varchar(50) NOT NULL,
+  passwordID int NOT NULL, -- הוספת עמודה עבור המפתח הזר
   PRIMARY KEY (userID),
-  FOREIGN KEY (addressID) REFERENCES addresses (addressID)
+  FOREIGN KEY (addressID) REFERENCES addresses (addressID),
+  FOREIGN KEY (passwordID) REFERENCES passwords (passwordID) -- קישור המפתח הזר לטבלת passwords
 );
+
+
 
 CREATE TABLE todos (
   todoID int AUTO_INCREMENT,
@@ -68,22 +79,34 @@ INSERT INTO addresses (street, city, zipcode) VALUES
 ('101 Pine St', 'San Francisco', '94101'),
 ('202 Maple St', 'Seattle', '98101'),
 ('303 Cedar St', 'Miami', '33101'),
-('404 Birch St', 'Dallas', '75201'),addresses
+('404 Birch St', 'Dallas', '75201'),
 ('505 Walnut St', 'Boston', '02101'),
 ('606 Ash St', 'Houston', '77001'),
 ('707 Spruce St', 'Atlanta', '30301');
 
-INSERT INTO users (userName, name, email, phone, addressID, company) VALUES
-('user1', 'Georgre Doe', 'Georgre@example.com', '123-456-7890', 1, 'ABC Inc.'),
-('user2', 'Kop Smith', 'Kop@example.com', '987-654-3210', 2, 'XYZ Corp.'),
-('user3', 'DavID Brown', 'davID@example.com', '111-222-3333', 3, '123 Industries'),
-('user4', 'Emily Johnson', 'emily@example.com', '444-555-6666', 4, '456 Corp.'),
-('user5', 'Michael Davis', 'michael@example.com', '777-888-9999', 5, '789 Co.'),
-('user6', 'Sarah Wilson', 'sarah@example.com', '000-111-2222', 6, 'ABC Corp.'),
-('user7', 'Daniel Martinez', 'daniel@example.com', '333-444-5555', 7, 'XYZ Ltd.'),
-('user8', 'Olivia Anderson', 'olivia@example.com', '666-777-8888', 8, '1234 Enterprises'),
-('user9', 'William Taylor', 'william@example.com', '999-000-1111', 9, '4567 Company'),
-('user10', 'Sophia Garcia', 'sophia@example.com', '222-333-4444', 10, '7899 LLC');
+INSERT INTO passwords (password) VALUES
+('P@ssw0rd1'),
+('S3cur3P@ss'),
+('Str0ngP@55'),
+('P@ssw0rd123'),
+('P@55w0rd!'),
+('P@ssw0rd!'),
+('P@ssw0rd123!'),
+('S3cur3P@55!'),
+('Str0ngP@55!'),
+('P@55w0rd123!');
+
+INSERT INTO users (userName, name, email, phone, addressID, company, passwordID) VALUES
+('user1', 'George Doe', 'George@example.com', '123-456-7890', 1, 'ABC Inc.', 1),
+('user2', 'Kop Smith', 'Kop@example.com', '987-654-3210', 2, 'XYZ Corp.', 2),
+('user3', 'David Brown', 'david@example.com', '111-222-3333', 3, '123 Industries', 3),
+('user4', 'Emily Johnson', 'emily@example.com', '444-555-6666', 4, '456 Corp.', 4),
+('user5', 'Michael Davis', 'michael@example.com', '777-888-9999', 5, '789 Co.', 5),
+('user6', 'Sarah Wilson', 'sarah@example.com', '000-111-2222', 6, 'ABC Corp.', 6),
+('user7', 'Daniel Martinez', 'daniel@example.com', '333-444-5555', 7, 'XYZ Ltd.', 7),
+('user8', 'Olivia Anderson', 'olivia@example.com', '666-777-8888', 8, '1234 Enterprises', 8),
+('user9', 'William Taylor', 'william@example.com', '999-000-1111', 9, '4567 Company', 9),
+('user10', 'Sophia Garcia', 'sophia@example.com', '222-333-4444', 10, '7899 LLC', 10);
 
 INSERT INTO todos (completed, title, userID) VALUES
 (true, 'Task 1', 1),
@@ -120,3 +143,10 @@ INSERT INTO comments (postID, body, email, commentName) VALUES
 (8, 'Comment 1 for post 8.', 'commenter8@example.com', 'Commenter 8'),
 (9, 'Comment 1 for post 9.', 'commenter9@example.com', 'Commenter 9'),
 (10, 'Comment 1 for post 10.', 'commenter10@example.com', 'Commenter 10');
+
+SELECT * 
+FROM addresses NATURAL JOIN users AS addresses_users;
+
+SELECT * 
+FROM passwords NATURAL JOIN users AS passwords_users;
+
