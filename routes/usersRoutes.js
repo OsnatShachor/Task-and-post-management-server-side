@@ -54,7 +54,7 @@ router.post("/", async (req, res) => {
   console.log(password);
   if (userName)
       if (password) {
-          user = await controller.getUserByNamePassword(password, userName);
+          user = await controller.getUserByNamePassword(userName, password);
           console.log(user);
           if(user.userName)
               {
