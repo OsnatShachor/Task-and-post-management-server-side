@@ -19,7 +19,7 @@ async function getUserByUserName(userName){
 }
 async function getUserByNamePassword(userName,password){
     try{
-        return model.getUserByUserName(userName,password)
+        return model.getUserByNamePassword(userName,password)
     }catch(err){
         throw err;
     }
